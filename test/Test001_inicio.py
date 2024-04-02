@@ -1,4 +1,4 @@
 import yaml_tree
 
-print("archivo ya creado")
+print("yaml imported")
 input()
