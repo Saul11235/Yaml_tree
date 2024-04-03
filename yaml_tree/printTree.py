@@ -3,20 +3,27 @@
 from os import get_terminal_size
 
 
+def cutline(text,size):
+    size=abs(int(size));text=str(text)
+    if len(text)<size: return text+" "*(size-len(text)-1)
+    else: return (text[0:size-1])
+
+
 def printLine(text):
-    text=str(text)
     console_width = get_terminal_size().columns
-    if len(text)<console_width: print(text)
-    else: print(text[0:console_width-1])
+    print(cutline(text,console_width))
 
 
 def printLineTree(tree,path):
     childs=tree.childs(path)
     for x in childs:
-        new_path=path+[x]
-        line=(" "*len(path))+" "+str(x)
+        new_path=path[:]+[x]
+        line1="XX"
+        line2=("    "*len(path))+" > "+str(x)
+        line3=""
+
         #-----  cicle on printLineTree --------
-        printLine(line)
+        printLine(line1+"|"+line2+line3)
         printLineTree(tree,new_path)
         #---------------------------------------
 
@@ -25,10 +32,9 @@ def printTree(tree):
     print("file   : "+str(tree.get_file()))
     print("know?  : "+str(tree.get_knowPath()))
     print("")
-    printLineTree(tree,[])
+    varpath=[]
+    printLineTree(tree,varpath)
 
 # --------------------------------------------------------
 if __name__=="__main__":
-    printLine(100*"------")
-    input()
-
+    pass
